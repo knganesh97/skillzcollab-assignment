@@ -1,4 +1,5 @@
 import React from "react";
+import SubmissionSection from "@/components/SubmissionSection";
 
 // Mock challenge data (in a real app, this would come from an API)
 const mockChallengeData: Record<string, any> = {
@@ -45,7 +46,7 @@ export default function ChallengeDetailsPage({ params }: { params: { challenge_i
     if (!challenge) {
         return <div className="p-8">Challenge not found.</div>;
     }
-    
+
     return (
         <div className="p-8 max-w-4xl mx-auto">
             <h1 className="text-3xl font-bold mb-4">{challenge.title}</h1>
@@ -89,9 +90,7 @@ export default function ChallengeDetailsPage({ params }: { params: { challenge_i
                     ))}
                 </ul>
             </div>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-                Submit Your Entry
-            </button>
+            <SubmissionSection />
         </div>
     );
 }
