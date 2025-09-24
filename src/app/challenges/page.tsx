@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import Card from "@/components/ui/Card"; // Adjust the import path if needed
+import Card from "@/components/ui/Card";
 
 // Mock data for challenges
 const mockChallenges = [
@@ -88,6 +88,23 @@ const statuses = [
 	...Array.from(new Set(mockChallenges.map((c) => c.status))),
 ];
 
+function HighlightedText({ text, search }: { text: string; search: string }) {
+    if (!search || search.length < 3) return <>{text}</>;
+    const regex = new RegExp(`(${search})`, "gi");
+    const parts = text.split(regex);
+    return (
+        <>
+            {parts.map((part, i) =>
+                regex.test(part) ? (
+                    <mark key={i} className="bg-yellow-200 dark:bg-yellow-600">{part}</mark>
+                ) : (
+                    <React.Fragment key={i}>{part}</React.Fragment>
+                )
+            )}
+        </>
+    );
+}
+
 export default function ChallengesPage() {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedStatus, setSelectedStatus] = useState("all");
@@ -160,23 +177,29 @@ export default function ChallengesPage() {
                     <Card key={challenge.id}>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="text-2xl">{challenge.brandLogo}</span>
-                            <span className="font-semibold">{challenge.brandName}</span>
+                            <span className="font-semibold">
+                                <HighlightedText text={challenge.brandName} search={searchTerm} />
+                            </span>
                         </div>
-                        <h2 className="text-lg font-bold mb-2">{challenge.title}</h2>
-                        <p className="text-gray-700 mb-2">{challenge.description}</p>
-                        <div className="text-sm text-gray-600 mb-1">
+                        <h2 className="text-lg font-bold mb-2">
+                            <HighlightedText text={challenge.title} search={searchTerm} />
+                        </h2>
+                        <p className="mb-2 text-gray-700 dark:text-gray-300">
+                            <HighlightedText text={challenge.description} search={searchTerm} />
+                        </p>
+                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Deadline:</span> {challenge.deadline}
                         </div>
-                        <div className="text-sm text-gray-600 mb-1">
+                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Reward:</span> {challenge.reward}
                         </div>
-                        <div className="text-sm text-gray-600 mb-1">
+                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Category:</span> {challenge.category}
                         </div>
-                        <div className="text-sm text-gray-600 mb-1">
+                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Status:</span> {challenge.status}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Participants:</span> {challenge.participants}
                         </div>
                     </Card>
