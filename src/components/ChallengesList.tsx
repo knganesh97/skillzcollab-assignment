@@ -1,6 +1,9 @@
 'use client'
 import React, { useState } from "react";
 import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import { Search, Filter, Calendar, Trophy, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Challenge = {
     id: number;
@@ -12,6 +15,7 @@ type Challenge = {
     reward: string;
     category: string;
     status: string;
+    participants?: number;
 };
 
 function HighlightedText({ text, search }: { text: string; search: string }) {
@@ -31,6 +35,13 @@ function HighlightedText({ text, search }: { text: string; search: string }) {
     );
 }
 
+// Helper for status badge color
+const statusColors: Record<string, string> = {
+    ongoing: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    closed: "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+    upcoming: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+};
+
 export default function ChallengesList({ challenges }: { challenges: Challenge[] }) {
     const categories = [
         "all",
@@ -44,6 +55,7 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedStatus, setSelectedStatus] = useState("all");
     const [searchTerm, setSearchTerm] = useState("");
+    const router = useRouter();
 
     const filteredChallenges = challenges.filter((c) => {
         const categoryMatch = selectedCategory === "all" || c.category === selectedCategory;
@@ -111,37 +123,53 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                 {filteredChallenges.map((challenge) => (
                     <Card
                         key={challenge.id}
+                        className="!border-0 bg-gradient-to-br from-[#f3e8ff] via-[#e0e7ff] to-white dark:bg-none dark:bg-[#181622] text-gray-900 dark:text-white"
                         header={
-                            <>
-                                <span className="text-3xl">{challenge.brandLogo}</span>
-                                <span className="font-semibold text-lg">
-                                    <HighlightedText text={challenge.brandName} search={searchTerm} />
+                            <div className="flex items-center justify-between w-full">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-2xl">{challenge.brandLogo}</span>
+                                    <span className="font-semibold text-base text-gray-900 dark:text-white">
+                                        <HighlightedText text={challenge.brandName} search={searchTerm} />
+                                    </span>
+                                    <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[challenge.status] || "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>
+                                        {challenge.status}
+                                    </span>
+                                </div>
+                                <span className="text-xl font-bold text-purple-800 dark:text-[#b98aff]">
+                                    {challenge.reward}
                                 </span>
-                            </>
+                            </div>
                         }
                         body={
                             <>
-                                <h2 className="text-xl font-bold mb-2">
+                                <h2 className="text-lg font-bold mb-2 text-purple-800 dark:text-[#b98aff]">
                                     <HighlightedText text={challenge.title} search={searchTerm} />
                                 </h2>
-                                <p className="mb-4 text-gray-700 dark:text-gray-300 min-h-[48px]">
+                                <p className="mb-4 text-purple-800 dark:text-gray-300 min-h-[48px]">
                                     <HighlightedText text={challenge.description} search={searchTerm} />
                                 </p>
-                                <div className="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
-                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                        <span className="font-medium">Deadline:</span> {challenge.deadline}
+                            </>
+                        }
+                        footer={
+                            <div className="flex flex-col w-full gap-3">
+                                <div className="flex items-center justify-between text-sm text-purple-700 dark:text-gray-400 mb-2">
+                                    <span className="flex items-center gap-1">
+                                        <Calendar className="w-4 h-4" />
+                                        Due: {challenge.deadline}
                                     </span>
-                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                        <span className="font-medium">Reward:</span> {challenge.reward}
-                                    </span>
-                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                        <span className="font-medium">Category:</span> {challenge.category}
-                                    </span>
-                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                        <span className="font-medium">Status:</span> {challenge.status}
+                                    <span className="flex items-center gap-1">
+                                        <Users className="w-4 h-4" />
+                                        {challenge.participants ?? 0} participants
                                     </span>
                                 </div>
-                            </>
+                                <Button
+                                    className="w-full mt-1 px-4 py-2 bg-purple-800 dark:bg-[#a259ff] cursor-pointer hover:bg-purple-600 dark:hover:bg-[#b98aff] text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
+                                    onClick={() => router.push(`/challenge/${challenge.id}`)}
+                                >
+                                    <Trophy className="w-4 h-4" />
+                                    View Challenge
+                                </Button>
+                            </div>
                         }
                     />
                 ))}
