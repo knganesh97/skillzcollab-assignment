@@ -5,79 +5,53 @@ import Link from "@/components/ui/Link";
 const Header: React.FC = () => {
   return (
     <header
+      className="
+        sticky top-0 z-50
+        backdrop-blur-md shadow-sm flex items-center justify-between px-10 py-3 transition-shadow border-b
+      "
       style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(8px)",
-        boxShadow: "0 2px 8px 0 rgba(79,140,255,0.06)",
-        borderBottom: "1px solid #e5e7eb",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0.75rem 2.5rem",
-        transition: "box-shadow 0.2s",
+        background: "var(--header-bg)",
+        borderColor: "var(--header-border)",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{
-            width: 40,
-            height: 40,
-            background: "linear-gradient(135deg, #4f8cff 60%, #7fbcff 100%)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: 22,
-            marginRight: 14,
-            boxShadow: "0 2px 8px 0 rgba(79,140,255,0.10)",
-            letterSpacing: "1px",
-          }}
-        >
-          S
-        </div>
-        <span
-          style={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: "#222",
-            letterSpacing: "0.5px",
+    <Link href="/" className="flex items-center group" style={{ textDecoration: "none" }}>
+      <img
+        src="/favicon.ico"
+        alt="SkillzCollab Logo"
+        className="w-11 h-11 rounded-full mr-4 shadow border-2"
+        style={{
+        borderColor: "var(--header-logo-border)",
+        }}
+      />
+    <span
+        className="text-2xl font-bold tracking-wide font-sans"
+        style={{
+            color: "var(--header-title)",
             fontFamily: "var(--font-geist-sans), sans-serif",
-          }}
-        >
-          SkillzCollab
-        </span>
-      </div>
-      <nav style={{ display: "flex", gap: "1.5rem" }}>
+        }}
+    >
+        SkillzCollab
+    </span>
+    </Link>
+      <nav className="flex gap-6">
         <Link
           href="/challenges"
+          className="
+            font-semibold text-base px-4 py-2 rounded-md transition-colors focus:outline-none
+          "
           style={{
-            textDecoration: "none",
-            color: "#4f8cff",
-            fontWeight: 600,
-            fontSize: 16,
-            padding: "0.4rem 1.1rem",
-            borderRadius: "6px",
-            transition: "background 0.15s, color 0.15s",
-            background: "transparent",
-            border: "none",
-            outline: "none",
-            cursor: "pointer",
+            color: "var(--header-link)",
           }}
-          onMouseOver={(e) => {
-            (e.target as HTMLElement).style.background = "#eaf2ff";
-            (e.target as HTMLElement).style.color = "#2563eb";
+          onMouseEnter={e => {
+            (e.target as HTMLElement).style.background = "var(--header-link-bg-hover)";
+            (e.target as HTMLElement).style.color = "var(--header-link-hover)";
           }}
-          onMouseOut={(e) => {
+          onMouseLeave={e => {
             (e.target as HTMLElement).style.background = "transparent";
-            (e.target as HTMLElement).style.color = "#4f8cff";
+            (e.target as HTMLElement).style.color = "var(--header-link)";
           }}
         >
-          Challenges
+          View All Challenges
         </Link>
       </nav>
     </header>

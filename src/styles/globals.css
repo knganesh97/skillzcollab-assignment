@@ -3,6 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Header-specific variables */
+  --header-bg: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 60%, #fff 100%);
+  --header-bg-dark: rgba(23,23,32,0.92);
+  --header-border: #e5e7eb;
+  --header-border-dark: #23263a;
+  --header-title: #222;
+  --header-title-dark: #e0e7ef;
+  --header-link: #2563eb;
+  --header-link-dark: #60a5fa;
+  --header-link-hover: #1d4ed8;
+  --header-link-hover-dark: #93c5fd;
+  --header-link-bg-hover: #eaf2ff;
+  --header-link-bg-hover-dark: #1e293b;
+  --header-logo-border: #dbeafe;
+  --header-logo-border-dark: #334155;
+  --header-logo-gradient: linear-gradient(135deg, #4f8cff 60%, #7fbcff 100%);
+  --header-logo-gradient-dark: linear-gradient(135deg, #2563eb 60%, #60a5fa 100%);
 }
 
 @theme inline {
@@ -16,6 +34,16 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Override header variables for dark mode */
+    --header-bg: var(--header-bg-dark);
+    --header-border: var(--header-border-dark);
+    --header-title: var(--header-title-dark);
+    --header-link: var(--header-link-dark);
+    --header-link-hover: var(--header-link-hover-dark);
+    --header-link-bg-hover: var(--header-link-bg-hover-dark);
+    --header-logo-border: var(--header-logo-border-dark);
+    --header-logo-gradient: var(--header-logo-gradient-dark);
   }
 }
 
