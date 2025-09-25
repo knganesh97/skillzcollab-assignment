@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Design Decisions
+
+- **Framework**: Chose Next.js for its hybrid static & server rendering, built-in routing, and strong developer experience.
+- **Directory Structure**: Followed the default Next.js app directory structure for clarity and maintainability.
+- **Styling**: Utilized Next.js built-in font optimization and Tailwind CSS for scoped, maintainable styles.
+- **TypeScript**: Enabled TypeScript for type safety and better developer tooling.
+- **Component Structure**: Adopted a modular, reusable component approach to promote code reuse and easier testing.
+- **State Management**: Preferred React’s built-in state management for simplicity; considered external libraries only when required.
+- **Deployment**: Optimized for deployment on Vercel for seamless CI/CD and performance.
+
+> These decisions aim to balance scalability, maintainability, and developer productivity.
