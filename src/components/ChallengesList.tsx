@@ -12,7 +12,6 @@ type Challenge = {
     reward: string;
     category: string;
     status: string;
-    participants: number;
 };
 
 function HighlightedText({ text, search }: { text: string; search: string }) {
@@ -108,37 +107,43 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                     />
                 </div>
             </div>
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {filteredChallenges.map((challenge) => (
-                    <Card key={challenge.id}>
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="text-2xl">{challenge.brandLogo}</span>
-                            <span className="font-semibold">
-                                <HighlightedText text={challenge.brandName} search={searchTerm} />
-                            </span>
-                        </div>
-                        <h2 className="text-lg font-bold mb-2">
-                            <HighlightedText text={challenge.title} search={searchTerm} />
-                        </h2>
-                        <p className="mb-2 text-gray-700 dark:text-gray-300">
-                            <HighlightedText text={challenge.description} search={searchTerm} />
-                        </p>
-                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Deadline:</span> {challenge.deadline}
-                        </div>
-                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Reward:</span> {challenge.reward}
-                        </div>
-                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Category:</span> {challenge.category}
-                        </div>
-                        <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Status:</span> {challenge.status}
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Participants:</span> {challenge.participants}
-                        </div>
-                    </Card>
+                    <Card
+                        key={challenge.id}
+                        header={
+                            <>
+                                <span className="text-3xl">{challenge.brandLogo}</span>
+                                <span className="font-semibold text-lg">
+                                    <HighlightedText text={challenge.brandName} search={searchTerm} />
+                                </span>
+                            </>
+                        }
+                        body={
+                            <>
+                                <h2 className="text-xl font-bold mb-2">
+                                    <HighlightedText text={challenge.title} search={searchTerm} />
+                                </h2>
+                                <p className="mb-4 text-gray-700 dark:text-gray-300 min-h-[48px]">
+                                    <HighlightedText text={challenge.description} search={searchTerm} />
+                                </p>
+                                <div className="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
+                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                        <span className="font-medium">Deadline:</span> {challenge.deadline}
+                                    </span>
+                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                        <span className="font-medium">Reward:</span> {challenge.reward}
+                                    </span>
+                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                        <span className="font-medium">Category:</span> {challenge.category}
+                                    </span>
+                                    <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                        <span className="font-medium">Status:</span> {challenge.status}
+                                    </span>
+                                </div>
+                            </>
+                        }
+                    />
                 ))}
             </div>
         </div>
