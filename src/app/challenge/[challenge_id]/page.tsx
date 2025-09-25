@@ -41,8 +41,9 @@ Your submission should demonstrate innovative thinking about materials, construc
   }
 };
 
-export default function ChallengeDetailsPage({ params }: { params: { challenge_id: string } }) {
-    const challenge = mockChallengeData[params.challenge_id];
+export default async function ChallengeDetailsPage({ params }: { params: { challenge_id: string } }) {
+    const {challenge_id} = await params;
+    const challenge = mockChallengeData[challenge_id];
     if (!challenge) {
         return <div className="p-8">Challenge not found.</div>;
     }
