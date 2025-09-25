@@ -13,7 +13,8 @@ const Card: React.FC<CardProps> = ({ header, body, footer, className = '', style
         <div
             className={`rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-900 transition-transform hover:shadow-lg hover:-translate-y-1 ${className}`}
             style={{
-                color: 'var(--foreground)',
+                background: "var(--card-background)",
+                color: "var(--card-foreground)",
                 ...style,
             }}
         >

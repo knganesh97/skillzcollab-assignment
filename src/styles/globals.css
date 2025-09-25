@@ -4,6 +4,9 @@
   --background: #ffffff;
   --foreground: #171717;
 
+  --card-background: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 60%, #fff 100%);
+  --card-foreground: #171717;
+
   /* Header-specific variables */
   --header-bg: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 60%, #fff 100%);
   --header-bg-dark: rgba(23,23,32,0.92);
@@ -42,6 +45,9 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --card-background: #181622;
+    --card-foreground: #ededed;
 
     /* Override header variables for dark mode */
     --header-bg: var(--header-bg-dark);

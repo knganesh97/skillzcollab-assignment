@@ -138,7 +138,7 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                 {filteredChallenges.map((challenge) => (
                     <Card
                         key={challenge.id}
-                        className="!border-0 bg-gradient-to-br from-[#f3e8ff] via-[#e0e7ff] to-white dark:bg-none dark:bg-[#181622] text-gray-900 dark:text-white"
+                        className="!border-0 text-gray-900 dark:text-white"
                         header={
                             <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center gap-2">
@@ -150,24 +150,24 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                                         {challenge.status}
                                     </span>
                                 </div>
-                                <span className="text-xl font-bold text-purple-800 dark:text-[#b98aff]">
+                                <span className="text-xl font-bold text-gray-800 dark:text-[#b98aff]">
                                     {challenge.reward}
                                 </span>
                             </div>
                         }
                         body={
                             <>
-                                <h2 className="text-lg font-bold mb-2 text-purple-800 dark:text-[#b98aff]">
+                                <h2 className="text-lg font-bold mb-2 text-gray-800 dark:text-[#b98aff]">
                                     <HighlightedText text={challenge.title} search={searchTerm} />
                                 </h2>
-                                <p className="mb-4 text-purple-800 dark:text-gray-300 min-h-[48px]">
+                                <p className="mb-4 text-gray-800 dark:text-gray-300 min-h-[48px]">
                                     <HighlightedText text={challenge.description} search={searchTerm} />
                                 </p>
                             </>
                         }
                         footer={
                             <div className="flex flex-col w-full gap-3">
-                                <div className="flex items-center justify-between text-sm text-purple-700 dark:text-gray-400 mb-2">
+                                <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-400 mb-2">
                                     <span className="flex items-center gap-1">
                                         <Calendar className="w-4 h-4" />
                                         Due: {challenge.deadline}
@@ -178,7 +178,7 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                                     </span>
                                 </div>
                                 <Button
-                                    className="w-full mt-1 px-4 py-2 bg-purple-800 dark:bg-[#a259ff] hover:bg-purple-600 dark:hover:bg-[#b98aff] text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
+                                    className="w-full mt-1 px-4 py-2 dark:bg-[#a259ff] dark:hover:bg-[#b98aff] text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
                                     onClick={() => router.push(`/challenge/${challenge.id}`)}
                                 >
                                     <Trophy className="w-4 h-4" />
