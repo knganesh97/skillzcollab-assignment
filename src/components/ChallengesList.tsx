@@ -178,7 +178,7 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
                                     </span>
                                 </div>
                                 <Button
-                                    className="w-full mt-1 px-4 py-2 bg-purple-800 dark:bg-[#a259ff] cursor-pointer hover:bg-purple-600 dark:hover:bg-[#b98aff] text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
+                                    className="w-full mt-1 px-4 py-2 bg-purple-800 dark:bg-[#a259ff] hover:bg-purple-600 dark:hover:bg-[#b98aff] text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
                                     onClick={() => router.push(`/challenge/${challenge.id}`)}
                                 >
                                     <Trophy className="w-4 h-4" />
