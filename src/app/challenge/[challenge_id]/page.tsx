@@ -1,5 +1,7 @@
 import React from "react";
 import SubmissionSection from "@/components/SubmissionSection";
+import CardContainer from "@/components/ui/CardContainer";
+import NotFound from "@/components/NotFound";
 
 // Mock challenge data (in a real app, this would come from an API)
 const mockChallengeData: Record<string, any> = {
@@ -45,53 +47,57 @@ export default async function ChallengeDetailsPage({ params }: { params: { chall
     const {challenge_id} = await params;
     const challenge = mockChallengeData[challenge_id];
     if (!challenge) {
-        return <div className="p-8">Challenge not found.</div>;
+        return <NotFound />;
     }
 
     return (
         <div className="p-8 max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-4">{challenge.title}</h1>
-            <div className="flex items-center mb-6">
-                <span className="text-4xl mr-4">{challenge.brandLogo}</span>
-                <h2 className="text-xl font-semibold">{challenge.brandName}</h2>
+            <div className="max-w-5xl mx-auto">
+                <CardContainer>
+                    <h1 className="text-3xl font-bold mb-4">{challenge.title}</h1>
+                    <div className="flex items-center mb-6">
+                        <span className="text-4xl mr-4">{challenge.brandLogo}</span>
+                        <h2 className="text-xl font-semibold">{challenge.brandName}</h2>
+                    </div>
+                    <p className="mb-6">{challenge.fullDescription}</p>
+                    <div className="mb-6">
+                        <strong>Deadline:</strong> {new Date(challenge.deadline).toLocaleDateString()}<br />
+                        <strong>Reward:</strong> {challenge.reward}<br />
+                        <strong>Category:</strong> {challenge.category}<br />
+                        <strong>Status:</strong> {challenge.status.charAt(0).toUpperCase() + challenge.status.slice(1)}<br />
+                        <strong>Participants:</strong> {challenge.participants}
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="text-2xl font-semibold mb-2">Guidelines</h3>
+                        <ul className="list-disc list-inside">
+                            {challenge.guidelines.map((guideline: string, index: number) => (
+                                <li key={index}>{guideline}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="text-2xl font-semibold mb-2">Resources</h3>
+                        <ul className="list-disc list-inside">
+                            {challenge.resources.map((resource: any, index: number) => (
+                                <li key={index}>
+                                    <a href={resource.url} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                                        {resource.name} ({resource.type})
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="text-2xl font-semibold mb-2">Submission Requirements</h3>
+                        <ul className="list-disc list-inside">
+                            {challenge.requirements.map((requirement: string, index: number) => (
+                                <li key={index}>{requirement}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <SubmissionSection />
+                </CardContainer>
             </div>
-            <p className="mb-6">{challenge.fullDescription}</p>
-            <div className="mb-6">
-                <strong>Deadline:</strong> {new Date(challenge.deadline).toLocaleDateString()}<br />
-                <strong>Reward:</strong> {challenge.reward}<br />
-                <strong>Category:</strong> {challenge.category}<br />
-                <strong>Status:</strong> {challenge.status.charAt(0).toUpperCase() + challenge.status.slice(1)}<br />
-                <strong>Participants:</strong> {challenge.participants}
-            </div>
-            <div className="mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Guidelines</h3>
-                <ul className="list-disc list-inside">
-                    {challenge.guidelines.map((guideline: string, index: number) => (
-                        <li key={index}>{guideline}</li>
-                    ))}
-                </ul>
-            </div>
-            <div className="mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Resources</h3>
-                <ul className="list-disc list-inside">
-                    {challenge.resources.map((resource: any, index: number) => (
-                        <li key={index}>
-                            <a href={resource.url} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-                                {resource.name} ({resource.type})
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div className="mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Submission Requirements</h3>
-                <ul className="list-disc list-inside">
-                    {challenge.requirements.map((requirement: string, index: number) => (
-                        <li key={index}>{requirement}</li>
-                    ))}
-                </ul>
-            </div>
-            <SubmissionSection />
         </div>
     );
 }
