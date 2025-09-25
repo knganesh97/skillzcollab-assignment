@@ -38,6 +38,7 @@ const Header: React.FC = () => {
           href="/challenges"
           className="
             font-semibold text-base px-4 py-2 rounded-md transition-colors focus:outline-none
+            hidden sm:inline-block
           "
           style={{
             color: "var(--header-link)",

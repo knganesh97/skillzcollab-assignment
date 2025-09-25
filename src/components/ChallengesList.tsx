@@ -70,53 +70,68 @@ export default function ChallengesList({ challenges }: { challenges: Challenge[]
 
     return (
         <div className="p-6">
-            <div className="mb-6 flex gap-6 flex-wrap">
-                <div>
-                    <label htmlFor="category" className="mr-2 font-medium">
-                        Filter by category:
-                    </label>
-                    <select
-                        id="category"
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="border rounded px-2 py-1"
-                    >
-                        {categories.map((cat) => (
-                            <option key={cat} value={cat}>
-                                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="status" className="mr-2 font-medium">
-                        Filter by status:
-                    </label>
-                    <select
-                        id="status"
-                        value={selectedStatus}
-                        onChange={(e) => setSelectedStatus(e.target.value)}
-                        className="border rounded px-2 py-1"
-                    >
-                        {statuses.map((status) => (
-                            <option key={status} value={status}>
-                                {status.charAt(0).toUpperCase() + status.slice(1)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="search" className="mr-2 font-medium">
-                        Search:
-                    </label>
-                    <input
-                        id="search"
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Type to search..."
-                        className="border rounded px-2 py-1"
-                    />
+            {/* Enhanced Filters & Search */}
+            <div className="mb-8">
+                <div className="flex flex-wrap gap-4 bg-gradient-to-r from-purple-100 via-indigo-100 to-white dark:from-[#232136] dark:via-[#181622] dark:to-[#181622] rounded-xl shadow-md px-6 py-4 items-center">
+                    {/* Category Filter */}
+                    <div className="flex flex-col">
+                        <label htmlFor="category" className="mb-1 text-sm font-medium text-purple-900 dark:text-purple-200">
+                            Category
+                        </label>
+                        <div className="relative">
+                            <Filter className="absolute left-2 top-2.5 w-4 h-4 text-purple-400 pointer-events-none" />
+                            <select
+                                id="category"
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="pl-8 pr-4 py-2 rounded-lg border border-purple-200 dark:border-purple-700 bg-white dark:bg-[#232136] text-purple-900 dark:text-purple-100 focus:ring-2 focus:ring-purple-400 transition"
+                            >
+                                {categories.map((cat) => (
+                                    <option key={cat} value={cat}>
+                                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    {/* Status Filter */}
+                    <div className="flex flex-col">
+                        <label htmlFor="status" className="mb-1 text-sm font-medium text-purple-900 dark:text-purple-200">
+                            Status
+                        </label>
+                        <div className="relative">
+                            <Filter className="absolute left-2 top-2.5 w-4 h-4 text-purple-400 pointer-events-none" />
+                            <select
+                                id="status"
+                                value={selectedStatus}
+                                onChange={(e) => setSelectedStatus(e.target.value)}
+                                className="pl-8 pr-4 py-2 rounded-lg border border-purple-200 dark:border-purple-700 bg-white dark:bg-[#232136] text-purple-900 dark:text-purple-100 focus:ring-2 focus:ring-purple-400 transition"
+                            >
+                                {statuses.map((status) => (
+                                    <option key={status} value={status}>
+                                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    {/* Search Input */}
+                    <div className="flex flex-col flex-1 min-w-[220px]">
+                        <label htmlFor="search" className="mb-1 text-sm font-medium text-purple-900 dark:text-purple-200">
+                            Search
+                        </label>
+                        <div className="relative">
+                            <Search className="absolute left-2 top-2.5 w-4 h-4 text-purple-400 pointer-events-none" />
+                            <input
+                                id="search"
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder="Type to search..."
+                                className="pl-8 pr-4 py-2 rounded-lg border border-purple-200 dark:border-purple-700 bg-white dark:bg-[#232136] text-purple-900 dark:text-purple-100 focus:ring-2 focus:ring-purple-400 transition"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
